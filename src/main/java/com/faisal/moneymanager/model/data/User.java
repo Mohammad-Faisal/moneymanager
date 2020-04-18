@@ -4,6 +4,7 @@ package com.faisal.moneymanager.model.data;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -17,13 +18,8 @@ import java.util.Set;
 public class User extends BaseEntity {
 
 
-
     private String username;
-
     private String password;
-
-    @Transient
-    private String passwordConfirm;
 
     @ManyToMany
     private Set<Role> roles;

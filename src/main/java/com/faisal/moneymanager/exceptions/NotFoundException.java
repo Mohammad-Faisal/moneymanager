@@ -18,3 +18,7 @@ public class NotFoundException extends RuntimeException {
         super(message , cause );
     }
 }
+
+//public class NotFoundException extends RuntimeException {
+//    private static final long serialVersionUID = 1L;
+//}

@@ -10,6 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -23,9 +24,18 @@ import java.util.Map;
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
 
+    @ExceptionHandler(value = NotFoundException.class)
+    public ResponseEntity<Object> exception(NotFoundException exception) {
+
+        ErrorResponse error =  ErrorResponse.builder()
+                //.status(HttpStatus.ACCEPTED)
+                .message("Validation Failed")
+                .build();
+        return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
+        //return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
+    }
 
     //this exception can be inside separate Exception Class
-
     public static class EntityNotFoundException extends BaseException {
         public EntityNotFoundException(String message) {
             super(message);
